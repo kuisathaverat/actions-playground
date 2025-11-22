@@ -50,17 +50,15 @@ pre-commit run --files <file1> <file2> ...
 
 #### YAML
 
-- **yamllint**: Validates YAML files
+- **yamlfmt**: Formats YAML files
 
 #### Markdown
 
-- **markdownlint**: Lints and fixes Markdown files
+- **markdownlint**: Lints Markdown files
 
 #### Python
 
-- **black**: Code formatter
-- **flake8**: Linter
-- **isort**: Import sorter
+- **yapf**: Google's Python code formatter
 
 #### JavaScript/Node.js
 
@@ -68,15 +66,16 @@ pre-commit run --files <file1> <file2> ...
 
 #### Go
 
-- **go-fmt**: Code formatter
-- **go-vet**: Code analyzer
-- **go-imports**: Import formatter
-- **go-mod-tidy**: Module dependency tidier
-- **golangci-lint**: Comprehensive linter
+- **golangci-lint**: Comprehensive Go linter
 
-### Security
+#### Shell Scripts
 
-- **detect-secrets**: Prevents committing secrets
+- **shellcheck**: Lints shell scripts
+
+### Security and Quality
+
+- **gitleaks**: Detects secrets and credentials
+- **codespell**: Checks for common spelling mistakes
 
 ## Skipping Hooks
 

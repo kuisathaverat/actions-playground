@@ -3,11 +3,10 @@
 # Installation: pip install pre-commit
 # Usage: pre-commit install
 # To run manually: pre-commit run --all-files
-
 repos:
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
         name: Trim trailing whitespace
@@ -25,63 +24,33 @@ repos:
         name: Check for case conflicts
       - id: mixed-line-ending
         name: Check mixed line endings
-
   # GitHub Actions linting
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.4
+    rev: v1.7.9
     hooks:
       - id: actionlint
         name: Lint GitHub Actions workflows
-
-  # YAML linting
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.35.1
+  # YAML formatting
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.20.0
     hooks:
-      - id: yamllint
-        name: Lint YAML files
-        args:
-          - --strict
-          - --config-data
-          - |
-            extends: default
-            rules:
-              line-length:
-                max: 120
-              document-start: disable
-              truthy:
-                check-keys: false
-
+      - id: yamlfmt
+        name: Format YAML files
   # Markdown linting
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.42.0
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
     hooks:
       - id: markdownlint
         name: Lint Markdown files
-        args: [--fix]
-
-  # Python linting and formatting
-  - repo: https://github.com/psf/black
-    rev: 24.10.0
+  # Python formatting
+  - repo: https://github.com/google/yapf
+    rev: v0.43.0
     hooks:
-      - id: black
-        name: Format Python code with Black
-
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.1
-    hooks:
-      - id: flake8
-        name: Lint Python code with Flake8
-        args: [--max-line-length=120]
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        name: Sort Python imports
-
+      - id: yapf
+        name: Format Python code with YAPF
   # JavaScript/Node.js linting
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.14.0
+    rev: v10.0.0-alpha.0
     hooks:
       - id: eslint
         name: Lint JavaScript/Node.js files
@@ -89,27 +58,27 @@ repos:
         types: [file]
         additional_dependencies:
           - eslint@8.57.0
-
-  # Go formatting
-  - repo: https://github.com/dnephin/pre-commit-golang
-    rev: v0.5.1
+  # Go linting
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.6.2
     hooks:
-      - id: go-fmt
-        name: Format Go code
-      - id: go-vet
-        name: Vet Go code
-      - id: go-imports
-        name: Format Go imports
-      - id: go-mod-tidy
-        name: Tidy Go modules
       - id: golangci-lint
         name: Lint Go code
-
-  # Security checks
-  - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.5.0
+  # Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
     hooks:
-      - id: detect-secrets
-        name: Detect secrets
-        args: ['--baseline', '.secrets.baseline']
-        exclude: package.lock.json
+      - id: shellcheck
+        name: Lint shell scripts
+  # Security checks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.29.1
+    hooks:
+      - id: gitleaks
+        name: Detect secrets with Gitleaks
+  # Spell checking
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: Check spelling
