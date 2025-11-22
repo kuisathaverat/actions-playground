@@ -14,6 +14,8 @@ jobs:
 
       - name: Run Gemini CLI with file references
         uses: google-github-actions/run-gemini-cli@v0
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         with:
           prompt: |
             Based on @docs/space/apollo-program.md, @docs/space/mars-rovers.md, and @docs/space/voyager-missions.md, what are the main differences in the technological challenges faced by these three types of space missions?
