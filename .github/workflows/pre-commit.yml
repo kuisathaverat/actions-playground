@@ -7,9 +7,7 @@ on:
 jobs:
   pre-commit:
     name: Run pre-commit hooks
-    runs-on: ubuntu-latest-8-cores
-    container:
-      image: ubuntu:24.04
+    runs-on: ubuntu-slim
     permissions:
       contents: read
     steps:

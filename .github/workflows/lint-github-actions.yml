@@ -10,7 +10,7 @@ permissions:
 jobs:
   scorecard:
     name: OSSF Scorecard Analysis
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       security-events: write
       id-token: write
@@ -33,7 +33,7 @@ jobs:
           sarif_file: results.sarif
   snyk-scan:
     name: Snyk GitHub Actions Scanner
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -52,7 +52,7 @@ jobs:
           sarif_file: snyk.sarif
   octoscan:
     name: Octoscan Security Scan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
