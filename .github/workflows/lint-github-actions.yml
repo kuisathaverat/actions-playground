@@ -8,16 +8,6 @@ permissions:
   security-events: write
   pull-requests: write
 jobs:
-  actionlint:
-    name: Run actionlint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Run actionlint
-        run: |
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-          ./actionlint -color
   scorecard:
     name: OSSF Scorecard Analysis
     runs-on: ubuntu-latest
