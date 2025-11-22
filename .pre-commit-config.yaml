@@ -48,16 +48,6 @@ repos:
     hooks:
       - id: yapf
         name: Format Python code with YAPF
-  # JavaScript/Node.js linting
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.57.0
-    hooks:
-      - id: eslint
-        name: Lint JavaScript/Node.js files
-        files: \.(js|jsx|ts|tsx)$
-        types: [file]
-        additional_dependencies:
-          - eslint@8.57.0
   # Go linting
   - repo: https://github.com/golangci/golangci-lint
     rev: v2.6.2
