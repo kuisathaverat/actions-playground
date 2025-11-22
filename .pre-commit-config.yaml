@@ -39,7 +39,17 @@ repos:
     hooks:
       - id: yamllint
         name: Lint YAML files
-        args: [--strict, --config-data, '{extends: default, rules: {line-length: {max: 120}, document-start: disable, truthy: {check-keys: false}}}']
+        args:
+          - --strict
+          - --config-data
+          - |
+            extends: default
+            rules:
+              line-length:
+                max: 120
+              document-start: disable
+              truthy:
+                check-keys: false
 
   # Markdown linting
   - repo: https://github.com/igorshubovych/markdownlint-cli

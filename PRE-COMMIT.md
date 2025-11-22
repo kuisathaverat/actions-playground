@@ -5,11 +5,13 @@ This repository uses [pre-commit](https://pre-commit.com/) to ensure code qualit
 ## Installation
 
 1. Install pre-commit:
+
    ```bash
    pip install pre-commit
    ```
 
 2. Install the git hooks:
+
    ```bash
    pre-commit install
    ```
@@ -31,6 +33,7 @@ pre-commit run --files <file1> <file2> ...
 ## Hooks Included
 
 ### General Checks
+
 - Trailing whitespace removal
 - End of file fixing
 - YAML syntax validation
@@ -42,23 +45,29 @@ pre-commit run --files <file1> <file2> ...
 ### Language-Specific Hooks
 
 #### GitHub Actions
+
 - **actionlint**: Lints GitHub Actions workflow files
 
 #### YAML
+
 - **yamllint**: Validates YAML files
 
 #### Markdown
+
 - **markdownlint**: Lints and fixes Markdown files
 
 #### Python
+
 - **black**: Code formatter
 - **flake8**: Linter
 - **isort**: Import sorter
 
 #### JavaScript/Node.js
+
 - **eslint**: Linter for JavaScript/TypeScript files
 
 #### Go
+
 - **go-fmt**: Code formatter
 - **go-vet**: Code analyzer
 - **go-imports**: Import formatter
@@ -66,6 +75,7 @@ pre-commit run --files <file1> <file2> ...
 - **golangci-lint**: Comprehensive linter
 
 ### Security
+
 - **detect-secrets**: Prevents committing secrets
 
 ## Skipping Hooks
@@ -86,7 +96,8 @@ pre-commit autoupdate
 
 ## GitHub Actions Integration
 
-The `.github/workflows/lint-github-actions.yml` workflow runs similar checks on pull requests that modify files in the `.github/` directory, including:
+The `.github/workflows/lint-github-actions.yml` workflow runs similar checks on pull requests that
+modify files in the `.github/` directory, including:
 
 - **actionlint**: GitHub Actions workflow linting
 - **OSSF Scorecard**: Security best practices analysis
