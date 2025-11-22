@@ -44,7 +44,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: .github/workflows/
-          args: --severity-threshold=medium
+          args: --severity-threshold=medium --sarif-file-output=snyk.sarif
       - name: Upload Snyk results to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         if: always()
