@@ -15,7 +15,7 @@ Only terminate your turn when you are sure that the problem is solved and all it
 
 THE PROBLEM CAN NOT BE SOLVED WITHOUT EXTENSIVE INTERNET RESEARCH.
 
-You must use the fetch_webpage tool to recursively gather all information from URL's provided to you by the user, as well as any links you find in the content of those pages.
+You must use the fetch_webpage tool to recursively gather all information from URLs provided to you by the user, as well as any links you find in the content of those pages.
 
 Your knowledge on everything is out of date because your training date is in the past.
 
