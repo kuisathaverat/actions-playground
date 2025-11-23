@@ -5,7 +5,7 @@ on:
     branches:
       - main
 permissions:
-	contents: read
+  contents: read
 jobs:
   pre-commit:
     name: Run pre-commit hooks
