@@ -43,6 +43,7 @@ repos:
       - id: markdownlint
         name: Lint Markdown files
         exclude: ^\.github/(agents|copilot-instructions\.md)
+        args: ['-r', '~MD013,~MD036']
   # Python formatting
   - repo: https://github.com/google/yapf
     rev: v0.43.0

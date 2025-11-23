@@ -1,18 +1,16 @@
 name: system-test-notification
-
 on:
   pull_request:
     types:
       - opened
       - reopened
-
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Test I can modify the workflow
         run: |
-          echo "Ye I can" 
+          echo "Ye I can"
   notify:
     # This job runs only if the pull request is from a forked repository.
     if: github.event.pull_request.head.repo.full_name != github.repository
@@ -21,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const { repo, owner } = context.repo
@@ -31,7 +29,7 @@ jobs:
               issue_number: context.issue.number,
               body: `
             ### :warning: Warning
-            System-tests will not be executed for this PR because it is from a forked repository. 
+            System-tests will not be executed for this PR because it is from a forked repository.
             But it will still create a successful \`system-test\` status check.
               `
             });
