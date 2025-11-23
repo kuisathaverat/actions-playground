@@ -5,8 +5,6 @@ on:
       - '.github/**'
 permissions:
   contents: read
-  security-events: write
-  pull-requests: write
 jobs:
   scorecard:
     name: OSSF Scorecard Analysis
@@ -34,6 +32,11 @@ jobs:
   snyk-scan:
     name: Snyk GitHub Actions Scanner
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,23 +56,20 @@ jobs:
   octoscan:
     name: Octoscan Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - id: octoscan
+        name: Run octoscan
+        uses: synacktiv/action-octoscan@v1
+
+      - name: Upload SARIF file to GitHub
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          python-version: '3.11'
-      - name: Install Octoscan
-        run: |
-          pip install octoscan
-      - name: Run Octoscan
-        run: |
-          octoscan --local-dir .github/workflows --output octoscan-report.json
-        continue-on-error: true
-      - name: Upload Octoscan results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: octoscan-report
-          path: octoscan-report.json
+          sarif_file: "${{steps.octoscan.outputs.sarif_output}}"
+          category: octoscan
