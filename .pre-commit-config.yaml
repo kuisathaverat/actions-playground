@@ -42,7 +42,7 @@ repos:
     hooks:
       - id: markdownlint
         name: Lint Markdown files
-        exclude: ^\.github/agents/
+        exclude: ^\.github/(agents|copilot-instructions\.md)
   # Python formatting
   - repo: https://github.com/google/yapf
     rev: v0.43.0
