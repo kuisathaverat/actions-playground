@@ -1,5 +1,4 @@
 name: completed
-
 on:
   workflow_run:
     branches-ignore:
@@ -8,11 +7,10 @@ on:
       - completed
     workflows:
       - heavy-test
-
 jobs:
   heavy-test:
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       issues: write
       pull-requests: write
       contents: write
@@ -21,22 +19,22 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: >
-          gh run download ${{ github.event.workflow_run.id }}
-          --name pr_num
-          --repo "${GITHUB_REPOSITORY}" 
-      - run: echo "pr_num=$(cat pr_num.txt)" >> $GITHUB_ENV
+          gh run download ${{ github.event.workflow_run.id }} --name pr_num --repo "${GITHUB_REPOSITORY}"
+
+      - id: get-pr-num
+        run: echo "pr_num=$(cat pr_num.txt)" >> "$GITHUB_OUTPUT"
       - name: set status
-        uses: actions/github-script@v6
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const { repo, owner } = context.repo
             await github.rest.issues.createComment({
               owner,
               repo,
-              issue_number: process.env.pr_num,
+              issue_number: ${{ steps.get-pr-num.outputs.pr_num }},
               body: "Hello from GitHub Actions"
             });
-            
+
             await github.rest.repos.createCommitStatus({
               owner,
               repo,

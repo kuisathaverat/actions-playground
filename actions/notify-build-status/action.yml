@@ -1,6 +1,5 @@
 name: notify-build-status
 description: "Notify the release status"
-
 inputs:
   vaultUrl:
     description: Vault URL
@@ -14,7 +13,6 @@ inputs:
   slackChannel:
     description: Slack channel
     required: false
-
 runs:
   using: composite
   steps:
@@ -32,7 +30,7 @@ runs:
       shell: python
       run: |
         import os
-        
+
         job_status = "${{ job.status }}"
         repo_url = "${{ github.server_url }}/${{ github.repository }}"
         pr_number = "${{ github.event.pull_request.number }}"
@@ -41,14 +39,14 @@ runs:
         event_name = "${{ github.event_name }}"
         is_pull_request = event_name == 'pull_request'
         sha = "${{ github.event.pull_request.head.sha }}" if is_pull_request else "${{ github.sha }}"
-        
+
         # Keys taken from https://docs.github.com/en/actions/learn-github-actions/contexts#job-context
         color_status_map = {
           "success": "good",
           "failure": "danger",
           "cancelled": "", # grey
         }
-                
+
         data = {
           "color": color_status_map[job_status],
           "short_sha": sha[:7],
@@ -56,11 +54,10 @@ runs:
           "run_url": f"{repo_url}/actions/runs/{run_id}/attempts/{run_attempt}",
           "repo_url": repo_url,
         }
-        
+
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             for key, value in data.items():
               print(f'{key}={value}', file=f)
-
     - uses: slackapi/slack-github-action@v1.22.0
       with:
         channel-id: '${{ inputs.slackChannel }}'

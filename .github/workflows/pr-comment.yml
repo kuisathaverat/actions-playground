@@ -1,29 +1,25 @@
 name: heavy-test
-
 on:
-  pull_request: 
+  pull_request:
   issue_comment:
     types:
       - created
-
 jobs:
   heavy-test:
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
-#    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/test')}}
+    #    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/test')}}
     steps:
       - run: echo '${{ toJSON(github.event) }}'
       - run: echo "Hello"
       - run: echo '${{ secrets.FAKE_SECRET }}'
-
       - name: Save the PR number in an artifact
         env:
           PR_NUM: ${{ github.event.number }}
-        run: echo $PR_NUM > pr_num.txt
-
+        run: echo "$PR_NUM" > pr_num.txt
       - name: Upload the PR number
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: pr_num
           path: ./pr_num.txt
@@ -40,8 +36,7 @@ jobs:
 #              issue_number: context.issue.number,
 #              body: "Hello from GitHub Actions"
 #            });
-            
-            
+
 #            function sleep(ms) {
 #              return new Promise(resolve => setTimeout(resolve, ms));
 #            }

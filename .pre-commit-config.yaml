@@ -1,0 +1,76 @@
+# Pre-commit hooks configuration
+# See https://pre-commit.com for more information
+# Installation: pip install pre-commit
+# Usage: pre-commit install
+# To run manually: pre-commit run --all-files
+repos:
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: check-yaml
+        name: Check YAML syntax
+        args: [--unsafe]
+      - id: check-added-large-files
+        name: Check for large files
+        args: ['--maxkb=1024']
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+      - id: check-case-conflict
+        name: Check for case conflicts
+      - id: mixed-line-ending
+        name: Check mixed line endings
+  # GitHub Actions linting
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.9
+    hooks:
+      - id: actionlint
+        name: Lint GitHub Actions workflows
+  # YAML formatting
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.20.0
+    hooks:
+      - id: yamlfmt
+        name: Format YAML files
+  # Markdown linting
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        name: Lint Markdown files
+        exclude: ^\.github/(agents|copilot-instructions\.md)
+        args: ['-r', '~MD013,~MD036']
+  # Python formatting
+  - repo: https://github.com/google/yapf
+    rev: v0.43.0
+    hooks:
+      - id: yapf
+        name: Format Python code with YAPF
+  # Go linting
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.6.2
+    hooks:
+      - id: golangci-lint
+        name: Lint Go code
+  # Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        name: Lint shell scripts
+  # Security checks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.29.1
+    hooks:
+      - id: gitleaks
+        name: Detect secrets with Gitleaks
+  # Spell checking
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: Check spelling
